@@ -1,5 +1,6 @@
 package com.example.vector.responses;
 
+import com.example.vector.processes.ParamOutput;
 
 public class MainResponse {
 
@@ -8,21 +9,17 @@ public class MainResponse {
     private final int secondXPOS;
     private final int firstYPOS;
     private final int secondYPOS;
-    private final double vectorRate;
-    private final int projectionOnX;
-    private final int projectionOnY;
 
-    public MainResponse(long id, int projectionOnX, int projectionOnY, double vectorRate, int firstXPOS, int secondXPOS,
-                        int firstYPOS, int secondYPOS) {
+    private final ParamOutput parameters;
+
+    public MainResponse(long id, int firstXPOS, int secondXPOS, int firstYPOS, int secondYPOS, ParamOutput parameters) {
 
         this.id = id;
         this.firstXPOS = firstXPOS;
         this.secondXPOS = secondXPOS;
         this.firstYPOS = firstYPOS;
         this.secondYPOS = secondYPOS;
-        this.vectorRate = vectorRate;
-        this.projectionOnX = projectionOnX;
-        this.projectionOnY = projectionOnY;
+        this.parameters = parameters;
 
     }
 
@@ -46,15 +43,5 @@ public class MainResponse {
         return secondYPOS;
     }
 
-    public double getVectorRate() {
-        return vectorRate;
-    }
-
-    public int getProjectionOnX() {
-        return projectionOnX;
-    }
-
-    public int getProjectionOnY() {
-        return projectionOnY;
-    }
+    public ParamOutput getParameters() { return parameters; }
 }

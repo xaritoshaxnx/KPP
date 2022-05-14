@@ -2,7 +2,8 @@ package com.example.vector.service;
 
 import com.example.vector.loggers.MainLogger;
 
-public class RateCalculation {
+public class RateCalculation
+{
 
     public int ProjectionOnX(int firstXPOS, int secondXPOS) {
         if((secondXPOS - firstXPOS) == 0) {
