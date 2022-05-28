@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import com.example.vector.exceptions.MainException;
 import com.example.vector.responses.MainResponse;
 import com.example.vector.service.RateCalculation;
+import com.example.vector.counter.Counter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +22,25 @@ public class MainController {
     public static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
     private final AtomicLong counter = new AtomicLong();
 
+    Cache cache;
+    Counter counterService;
+
+    @Autowired
+    public void setCounter(Counter counter) {
+        this.counterService = counter;
+    }
+
+    @Autowired
+    public void setCache(Cache cache) {
+        this.cache = cache;
+    }
+
+
     @GetMapping("/vector")
     public MainResponse getPos(@RequestParam(value = "x1", defaultValue = "3") int firstXPOS,
                                @RequestParam(value = "x2", defaultValue = "8") int secondXPOS,
                                @RequestParam(value = "y1", defaultValue = "6") int firstYPOS,
                                @RequestParam(value = "y2", defaultValue = "12") int secondYPOS) throws MainException {
-        Cache cache = context.getBean("cache", Cache.class);
         ParamOutput params;
         //int coordinates[] = new int [4];
         String coordinates = firstXPOS + "" + secondXPOS + "" + firstYPOS + "" + secondYPOS + "";
@@ -44,6 +59,9 @@ public class MainController {
         if(params.getProjectionOnX() == 0 && params.getProjectionOnY() == 0) {
             throw new MainException("As the projections are nill your vector stands as a simple point without rate...");
         }
+        counterService.inc();
+        MainLogger.warn("Counter"+counterService.getRequestsCount());
+
         return new MainResponse(counter.incrementAndGet(),  firstXPOS,
                 secondXPOS, firstYPOS, secondYPOS, params );
     }

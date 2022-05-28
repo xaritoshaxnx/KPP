@@ -2,8 +2,11 @@ package com.example.vector.cache;
 
 import com.example.vector.loggers.MainLogger;
 import com.example.vector.processes.ParamOutput;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 
+@Service
 
 public class Cache {
     public static HashMap<String, ParamOutput> map = new HashMap<>();
