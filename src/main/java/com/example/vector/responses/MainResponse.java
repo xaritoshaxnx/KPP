@@ -1,47 +1,29 @@
 package com.example.vector.responses;
 
 import com.example.vector.processes.ParamOutput;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
+@EqualsAndHashCode
 public class MainResponse {
-
-    private final long id;
-    private final int firstXPOS;
-    private final int secondXPOS;
-    private final int firstYPOS;
-    private final int secondYPOS;
 
     private final ParamOutput parameters;
 
-    public MainResponse(long id, int firstXPOS, int secondXPOS, int firstYPOS, int secondYPOS, ParamOutput parameters) {
+    public MainResponse(ParamOutput parameters) {
 
-        this.id = id;
-        this.firstXPOS = firstXPOS;
-        this.secondXPOS = secondXPOS;
-        this.firstYPOS = firstYPOS;
-        this.secondYPOS = secondYPOS;
+
         this.parameters = parameters;
 
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public int getFirstXPOS() {
-        return firstXPOS;
-    }
-
-    public int getSecondXPOS() {
-        return secondXPOS;
-    }
-
-    public int getFirstYPOS() {
-        return firstYPOS;
-    }
-
-    public int getSecondYPOS() {
-        return secondYPOS;
-    }
 
     public ParamOutput getParameters() { return parameters; }
+
+    public double getRate() {
+        return parameters.getVectorRate();
+    }
+
+
 }

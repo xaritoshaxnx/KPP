@@ -14,7 +14,8 @@ public class Cache {
     {
         if (!map.containsKey(coordinates)) {
             map.put(coordinates, parameters);
-            MainLogger.info("Key (coordinates): " + coordinates + " Values: " + parameters.getVectorRate() + parameters.getProjectionOnY() + parameters.getProjectionOnX() + " is put in cache");
+            MainLogger.info("Key (coordinates): " + coordinates + " Values: " + parameters.getVectorRate() + " "
+                    + parameters.getProjectionOnY() + " " + parameters.getProjectionOnX() + " is put in cache");
         }
         else {
             MainLogger.info("Responce is already in cache!");
